@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.damage.adjuster.dao.MainDao">
+
+<!--    <insert id="docalculrateDao" parameterType="com.damage.adjuster.dao.MainDao" resultType="int">-->
+<!--        select id, user_id as userId ,user_pw as userPw,user_name as userName ,create_date as createDate,update_date as updateDate from fd_user-->
+<!--        <trim prefix="WHERE" prefixOverrides="AND|OR">-->
+<!--            <if test="userId != null and userId != '' " >-->
+<!--                user_id = #{userId}-->
+<!--            </if>-->
+<!--            <if test="userPw != null and userPw != '' " >-->
+<!--                AND user_pw = #{userPw}-->
+<!--            </if>-->
+<!--        </trim>-->
+<!--    </insert>-->
+
+    <insert id="docalculrateDao" parameterType="com.damage.adjuster.dao.MainDao">
+	    <![CDATA[
+        INSERT INTO main(
+--                           생년월일
+                        birthdate
+--                               사고발생일
+                        , accident_date
+--                               입원일수
+                        , hospital_period
+--                               통원치료 횟수
+                        , treatment_num
+--                               과실율
+                        , error_rate
+--                               소득구분
+                        , income_class
+--                               월소득
+                        , income_month
+--                               진단주수
+                        , treatment_week
+--                               사고부위
+                        , accident_type
+--                               피해내용
+                        , accident_content
+--                               항우치료비
+                        , after_treatment_fee
+                        , create_at
+                        , update_at
+                        , face_check
+                        , waist_check
+                        , neck_check
+                        , hand_check
+                        , belly_check
+                        , leg_check
+                        , teeth_check
+                        , shoulder_check
+                        , sprain_check
+                        , bruise_check
+                        , fracture_check
+                        , bonefracture_check
+        )VALUES (
+                 #{birthdate}
+                , #{accidentDate}
+                , #{hospitalPeriod}
+                , #{treatmentNum}
+                , #{errorRate}
+                , #{incomeClass}
+                , #{incomeMonth}
+                , #{treatmentWeek}
+                , #{accidentType}
+                , #{accidentContent}
+                , #{afterTreatmentFee}
+                , now()
+                , now()
+                , #{face}
+                , #{waist}
+                , #{neck}
+                , #{hand}
+                , #{belly}
+                , #{leg}
+                , #{teeth}
+                , #{shoulder}
+                , #{sprain}
+                , #{bruise}
+                , #{fracture}
+                , #{ripped}
+                )
+        ]]>
+    </insert>
+
+<!--                     , now()-->
+<!--                    , #{modId}-->
+<!--                    , now()-->
+<!--                    , 'N'-->
+
+</mapper>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>교통사고 합의금 계산기</title>
+  <link rel="stylesheet" href="../static/css/style.css">
+  <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+  <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+</head>
+<body>
+  <div id="root">
+    <main id="main">
+      <div class="contractDetail">
+        <div class="detailInfo">
+          <div class="info1 box">
+            <h1>고객정보</h1>
+            <div>
+              <p>생년월일</p>
+              <input type="date" class="grayBox" id="birthdate"/>
+            </div>
+            <div>
+              <p>사고발생일</p>
+              <input class="grayBox" type="date" id="accident_date"/>
+            </div>
+            <div>
+              <p>입원일수</p>
+              <input class="grayBox" type="text" id="hospital_period"/>
+            </div>
+            <div>
+              <p>통원치료 횟수</p>
+              <input class="grayBox" type="text" id="treatment_num"/>
+            </div>
+            <div>
+              <p>과실율(본인과실)</p>
+              <input class="grayBox" type="text" id="error_rate"/>
+            </div>
+            <div>
+              <p>소득구분</p>
+              <input class="grayBox" type="text" id="income_class"/>
+            </div>
+            <div>
+              <p>소득구분</p>
+              <input type="radio" name="radi_info" value="soleproprietor">개인사업자(프리랜서,일용직)<br>
+              <input type="radio" name="radi_info" value="salaried">급여소득자(사대보험가입)<br>
+              <input type="radio" name="radi_info" value="jobless">무직자(전업주부,학생)<br>
+              <input type="radio" name="radi_info" value="minor">미성년자<br>
+            </div>
+            <div>
+              <p>월소득(원)</p>
+              <input class="grayBox" type="text" id="income_month"/>
+            </div>
+            <div>
+              <p>진단주수(주)</p>
+              <input class="grayBox" type="text" id="treatment_week"/>
+            </div>
+<!--            <div>-->
+<!--              <p>사고부위</p>-->
+<!--              <input class="grayBox" type="text" id="accident_type"/>-->
+<!--            </div>-->
+            <div>
+              <p>사고부위</p>
+              <input type="checkbox" name="chk_info" id="face" value=1>얼굴
+              <input type="checkbox" name="chk_info"  id="waist" value=1>허리(척추)
+              <input type="checkbox" name="chk_info"  id="neck" value=1>목 <br>
+              <input type="checkbox" name="chk_info"  id="hand" value=1>팔(손)
+              <input type="checkbox" name="chk_info"  id="belly" value=1>복부(가슴)
+              <input type="checkbox" name="chk_info"  id="leg" value=1>다리(발)<br>
+              <input type="checkbox" name="chk_info"  id="shoulder" value=1>어깨
+              <input type="checkbox" name="chk_info"  id="teeth" value=1>치아
+            </div>
+<!--            <div>-->
+<!--              <p>피해내용</p>-->
+<!--              <input class="grayBox" type="text" id="accident_content"/>-->
+<!--            </div>-->
+            <div>
+              <p>피해내용</p>
+              <input type="checkbox" name="chk_info2" id="sprain" value=1>염좌
+              <input type="checkbox" name="chk_info2" id="bruise" value=1>타박상 <br>
+              <input type="checkbox" name="chk_info2" id="fracture" value=1>부러짐(골절)
+              <input type="checkbox" name="chk_info2" id="ripped" value=1>찢어짐(창상)
+            </div>
+            <div>
+              <p>항후 치료비</p>
+              <input class="grayBox" type="text" id="after_treatment_fee">
+            </div>
+          </div>
+          <div class="info1 box">
+            <h1>고객정보(제2운전자)</h1>
+            <div>
+              <p>고객명</p>
+              <input class="grayBox" type="text">
+            </div>
+            <div>
+              <p>고객 연락처</p>
+              <input class="grayBox" type="text">
+            </div>
+            <div>
+              <p>주소</p>
+              <input class="grayBox" type="text">
+            </div>
+            <div>
+              <p>주소상세</p>
+              <input class="grayBox" type="text">
+            </div>
+            <div>
+              <p>면허번호</p>
+              <input class="grayBox" type="text">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="buttonAreaTwo column">
+        <button onclick="calculrate()">계산</button>
+        <button onclick="checkButton()">cpzm</button>
+      </div>
+    </main>
+  </div>
+
+<script>
+
+  // /* 화살표 함수 */
+  // const label = document.querySelector('.label');
+  // const options = document.querySelectorAll('.optionItem');
+  //
+  // // 클릭한 옵션의 텍스트를 라벨 안에 넣음
+  // const handleSelect = (item) => {
+  //   label.parentNode.classList.remove('active');
+  //   label.innerHTML = item.textContent;
+  // }
+  // // 옵션 클릭시 클릭한 옵션을 넘김
+  // options.forEach(option => {
+  //   option.addEventListener('click', () => handleSelect(option))
+  // })
+  //
+  // // 라벨을 클릭시 옵션 목록이 열림/닫힘
+  // label.addEventListener('click', () => {
+  //   if(label.parentNode.classList.contains('active')) {
+  //     label.parentNode.classList.remove('active');
+  //   } else {
+  //     label.parentNode.classList.add('active');
+  //   }
+  // })
+
+
+  function openPop(){
+    var popup = window.open('/damagecheck', '데미지체크', 'width=900px,height=800px,scrollbars=yes');
+  }
+
+  function checkButton(){
+    let face = $("#face:checked").val(); //얼굴
+    let waist    = $("#waist:checked").val();  //허리(척추)
+    let neck     = $("#neck:checked").val();   //목
+    let hand     = $("#hand:checked").val();  //팔(손)
+    let belly     = $("#belly:checked").val();  //복부(가슴)
+    let leg     = $("#leg:checked").val();  //다리(발)
+    let teeth       = $("#teeth:checked").val();  //치아
+    let shoulder     = $("#shoulder:checked").val(); //어께
+    let sprain     = $("#sprain:checked").val();  //염좌
+    let bruise     = $("#bruise:checked").val(); //타박상
+    let fracture     = $("#fracture:checked").val(); //부러짐
+    let ripped     = $("#ripped:checked").val();   //골절
+    console.log(face + "   1");
+    console.log(waist+ "   2");
+    console.log(neck+ "   3");
+    console.log(hand+ "   4");
+    console.log(belly+ "   5");
+    console.log(leg+ "   6");
+    console.log(teeth+ "   7");
+    console.log(shoulder+ "   8");
+    console.log(sprain+ "   9");
+    console.log(bruise+ "   10");
+    console.log(fracture+ "   11");
+    console.log(ripped+ "   12");
+
+  }
+
+  function calculrate(){
+    let birthdate = $("#birthdate").val(); // 생년월일
+    let accidentDate = $("#accident_date").val(); // 사고발생일
+    let hospitalPeriod = $("#hospital_period").val(); // 입원일수
+    let treatmentNum = $("#treatment_num").val(); // 통원치료 횟수
+    let errorRate = $("#error_rate").val(); // 과실율
+    let incomeClass = $('input:radio[name=radi_info]:checked').val(); // 소득구분
+    let incomeMonth = $("#income_month").val();  // 월소득
+    let treatmentWeek = $("#treatment_week").val(); // 진단수주
+    let accidentType = $("#accident_type").val(); // 사고부위
+    let accidentContent = $("#accident_content").val(); // 피해내용
+    let afterTreatmentFee  = $("#after_treatment_fee").val(); // 항우치료비
+
+    let face = $("#face :checked").val(); //얼굴
+    let waist    = $("#waist:checked").val();  //허리(척추)
+    let neck     = $("#neck:checked").val();   //목
+    let hand     = $("#hand:checked").val();  //팔(손)
+    let belly     = $("#belly:checked").val();  //복부(가슴)
+    let leg     = $("#leg:checked").val();  //다리(발)
+    let teeth       = $("#teeth:checked").val();  //치아
+    let shoulder     = $("#shoulder:checked").val(); //어께
+
+    let sprain     = $("#sprain:checked").val();  //염좌
+    let bruise     = $("#bruise:checked").val(); //타박상
+    let fracture     = $("#fracture:checked").val(); //부러짐(골절)
+    let ripped     = $("#ripped:checked").val();   //찢어짐
+
+    $.ajax({
+      type : "POST",
+      url : "/api/v1/app/calculrate",
+      dataType : "json",
+      data: {
+        "birthdate":birthdate,
+        "accidentDate":accidentDate,
+        "hospitalPeriod":hospitalPeriod,
+        "treatmentNum":treatmentNum,
+        "errorRate":errorRate,
+        "incomeClass":incomeClass,
+        "incomeMonth":incomeMonth,
+        "treatmentWeek":treatmentWeek,
+        "accidentType":accidentType,
+        "accidentContent":accidentContent,
+        "afterTreatmentFee":afterTreatmentFee,
+        "face":face,
+        "waist":waist,
+        "neck":neck,
+        "hand":hand,
+        "belly":belly,
+        "leg":leg,
+        "teeth":teeth,
+        "shoulder":shoulder,
+        "sprain":sprain,
+        "bruise":bruise,
+        "fracture":fracture,
+        "ripped":ripped,
+      },
+      error : function(){
+        alert('저장에러.');
+      },
+      success : function(data){
+        // alert("통신데이터 값 : " + data);
+        alert('계산 완료.');
+        window.location.reload();
+      }
+
+    });
+
+      $("#login").click(function() {
+        var userId = $("#userId").val();
+        var userPw = $("#userPw").val();
+        console.log(userId + " userId")
+        console.log(userPw + "   userPw")
+      });
+
+
+
+  }
+
+</script>
+</body>
+</html>
