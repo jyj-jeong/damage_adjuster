@@ -543,9 +543,9 @@ main .memo {
 }
 
 .info1 {
-  width:15%;
+  width:48%;
   height:40%;
-  min-height: 1500px;
+  /*min-height: 1500px;*/
   padding:15px;
   background-color: white;
 
@@ -1207,7 +1207,7 @@ th {
   }
 
   .info1 {
-    width:30%;
+    width:48%;
   }
 
   .info2 {
@@ -1321,7 +1321,7 @@ th {
   }
 
   .info1 {
-    width:30%;
+    width:48%;
   }
 
   .info1 img {

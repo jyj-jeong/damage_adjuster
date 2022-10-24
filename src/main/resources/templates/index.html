@@ -6,13 +6,18 @@
   <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
   <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 </head>
+<header>
+    <div style="background-color: blue;height: 150px">
+         광고 영역
+    </div>
+</header>
 <body>
   <div id="root">
     <main id="main">
       <div class="contractDetail">
         <div class="detailInfo">
-          <div class="info1 box">
-            <h1>고객정보</h1>
+          <div class="info1 box" style="height: 1500px">
+<!--            <h1>고객정보</h1>-->
             <div>
               <p>생년월일</p>
               <input type="date" class="grayBox" id="birthdate"/>
@@ -33,20 +38,20 @@
               <p>과실율(본인과실)</p>
               <input class="grayBox" type="text" id="error_rate"/>
             </div>
+<!--            <div>-->
+<!--              <p>소득구분</p>-->
+<!--              <input class="grayBox" type="text" id="income_class"/>-->
+<!--            </div>-->
             <div>
               <p>소득구분</p>
-              <input class="grayBox" type="text" id="income_class"/>
-            </div>
-            <div>
-              <p>소득구분</p>
-              <input type="radio" name="radi_info" value="soleproprietor">개인사업자(프리랜서,일용직)<br>
-              <input type="radio" name="radi_info" value="salaried">급여소득자(사대보험가입)<br>
-              <input type="radio" name="radi_info" value="jobless">무직자(전업주부,학생)<br>
-              <input type="radio" name="radi_info" value="minor">미성년자<br>
+              <input type="radio" id="soleproprietor" name="radi_info" value="soleproprietor">개인사업자(프리랜서,일용직)<br>
+              <input type="radio" id="salaried" name="radi_info" value="salaried">급여소득자(사대보험가입)<br>
+              <input type="radio" id="jobless" name="radi_info" value="jobless">무직자(전업주부,학생)<br>
+              <input type="radio" id="minor" name="radi_info" value="minor">미성년자<br>
             </div>
             <div>
               <p>월소득(원)</p>
-              <input class="grayBox" type="text" id="income_month"/>
+              <input class="grayBox" type="text" id="income_month" onkeyup="commaval(this.id)"/>
             </div>
             <div>
               <p>진단주수(주)</p>
@@ -80,42 +85,126 @@
             </div>
             <div>
               <p>항후 치료비</p>
-              <input class="grayBox" type="text" id="after_treatment_fee">
+              <input class="grayBox" type="text" id="after_treatment_fee" onkeyup="commaval(this.id)"/>
             </div>
+            <div class="buttonAreaTwo column">
+              <button onclick="calculrate()">계산</button>
+              <!--        <button onclick="checkButton()">cpzm</button>-->
+            </div>
+              <div style="background-color: blue;height: 450px">
+                  광고영역
+              </div>
           </div>
-          <div class="info1 box">
-            <h1>고객정보(제2운전자)</h1>
+          <div class="info1 box" style="height: 1500px">
+            <P style="margin-right: 250px;color:red">**필독</P>
+                <pre style="margin-right:100px">
+                  교통사고 합의금 계산기는 급여소득자나 학생, 전업주부등
+                  직업에 관계없이 보험사와 합의 시 적당한 보험금 또는
+                  합의금 계산에 대해 알려드릴 목적으로 만들어 졌으며
+                  보험사에 제출되는 서류로서 근거가 되지 않음을
+                  알려드립니다.
+                </pre>
             <div>
-              <p>고객명</p>
-              <input class="grayBox" type="text">
+              <h2>교통사고 합의금 계산결과</h2>
+              <table>
+                <th>구분</th>
+                <th>보험사기준</th>
+                <th>법원판결기준</th>
+                <tr><!-- 첫번째 줄 시작 -->
+                  <td>휴업손해액</td>
+                  <td id="bohumlossofbusiness">0</td>
+                  <td id="bubumlossofbusiness">0</td>
+                </tr><!-- 첫번째 줄 끝 -->
+                <tr><!-- 두번째 줄 시작 -->
+                  <td>향후치료비</td>
+                  <td id="afterTreatmentFee">0</td>
+                  <td id="afterTreatmentFee2">0</td>
+                </tr><!-- 두번째 줄 끝 -->
+                <tr>
+                  <td>위자료</td>
+                  <td id="bohumsolatium">0</td>
+                  <td id="bubumsolatium">0</td>
+                </tr>
+                <tr>
+                  <td>교통비</td>
+                  <td id="transportcost">0</td>
+                  <td id="transportcost2">0</td>
+                </tr>
+                <tr>
+                  <td>합계</td>
+                  <td id="bohum_sum">0</td>
+                  <td id="bubum_sum">0</td>
+                </tr>
+              </table>
+                <div style="color: red">
+                    * “법원 판결 기준”은 합의금 분쟁 소송 진행 시 예상되는 금액입니다.<br>
+                    * 장해 등의 큰 사고의 경우 계산이 맞지 않을 수 있습니다.
+                </div>
             </div>
-            <div>
-              <p>고객 연락처</p>
-              <input class="grayBox" type="text">
-            </div>
-            <div>
-              <p>주소</p>
-              <input class="grayBox" type="text">
-            </div>
-            <div>
-              <p>주소상세</p>
-              <input class="grayBox" type="text">
-            </div>
-            <div>
-              <p>면허번호</p>
-              <input class="grayBox" type="text">
-            </div>
+              <div class="buttonArea">
+                  <button style="background-color: yellow;color:black" onclick = "window.open('http://pf.kakao.com/_xlVxkKxj')">
+                      <strong>카톡 무료상담 신청</strong>
+                  </button>
+              </div>
+
+              <h2>최근 실시간 계산기 사용</h2>
+              <table>
+                  <th>진단주수</th>
+                  <th>사고부위</th>
+                  <th>피해내용</th>
+                  <th>합의금(보험사)</th>
+                  <th>합의금(법원)</th>
+                  <tr th:each="allList : ${allcall}">
+                      <td th:text="${allList.treatmentWeek}">0</td>
+                      <td th:text="${allList.accidentType}">0</td>
+                      <td th:text="${allList.accidentContent}">0</td>
+                      <td th:text="${allList.bohumSum}">0</td>
+                      <td th:text="${allList.bubumSum}">0</td>
+                  </tr><!-- 첫번째 줄 끝 -->
+<!--                  <tr>-->
+<!--                      <td>1번</td>-->
+<!--                      <td>두번째 칸</td>-->
+<!--                      <td>세번째 칸</td>-->
+<!--                      <td>4번</td>-->
+<!--                      <td>5번</td>-->
+<!--                  </tr>-->
+<!--                  <tr>-->
+<!--                      <td>1번</td>-->
+<!--                      <td>두번째 칸</td>-->
+<!--                      <td>세번째 칸</td>-->
+<!--                      <td>4번</td>-->
+<!--                      <td>5번</td>-->
+<!--                  </tr>-->
+<!--                  <tr>-->
+<!--                      <td>1번</td>-->
+<!--                      <td>두번째 칸</td>-->
+<!--                      <td>세번째 칸</td>-->
+<!--                      <td>4번</td>-->
+<!--                      <td>5번</td>-->
+<!--                  </tr>-->
+<!--                  <tr>-->
+<!--                      <td>1번</td>-->
+<!--                      <td>두번째 칸</td>-->
+<!--                      <td>세번째 칸</td>-->
+<!--                      <td>4번</td>-->
+<!--                      <td>5번</td>-->
+<!--                  </tr>-->
+              </table>
           </div>
         </div>
       </div>
-      <div class="buttonAreaTwo column">
-        <button onclick="calculrate()">계산</button>
-        <button onclick="checkButton()">cpzm</button>
-      </div>
     </main>
+      <footer>
+          <div style="background-color: blue;height: 250px">
+              광고 영역
+          </div>
+      </footer>
   </div>
 
 <script>
+
+    var moneycom =/\B(?=(\d{3})+(?!\d))/g;
+    var regex = /[^0-9]/g;
 
   // /* 화살표 함수 */
   // const label = document.querySelector('.label');
@@ -140,10 +229,31 @@
   //   }
   // })
 
+    function commaval(id){
+        // alert(id + '      내아이디');
+        console.log(id + '      내아이디');
+       let nocommaVal = $("#"+id+"").val();
+        $("#"+id+"").val(nocommaVal.replace(regex,"").replace(moneycom,","));
+    }
 
-  function openPop(){
-    var popup = window.open('/damagecheck', '데미지체크', 'width=900px,height=800px,scrollbars=yes');
-  }
+    // 직업에 따른 월소득 분류
+  $("#soleproprietor").click(function (){
+    $("#income_month").val("2,881,388");
+    $("#income_month").attr("disabled", false);
+  });
+  $("#salaried").click(function (){
+    $("#income_month").val("");
+    $("#income_month").attr("disabled", false);
+  });
+  $("#jobless").click(function (){
+    $("#income_month").val("2,529,090");
+    $("#income_month").attr("disabled", true);
+  });
+  $("#minor").click(function (){
+    $("#income_month").val("0");
+    $("#income_month").attr("disabled", true);
+  });
+
 
   function checkButton(){
     let face = $("#face:checked").val(); //얼굴
@@ -180,11 +290,11 @@
     let treatmentNum = $("#treatment_num").val(); // 통원치료 횟수
     let errorRate = $("#error_rate").val(); // 과실율
     let incomeClass = $('input:radio[name=radi_info]:checked').val(); // 소득구분
-    let incomeMonth = $("#income_month").val();  // 월소득
+    let incomeMonth = $("#income_month").val().replace(regex,"");  // 월소득
     let treatmentWeek = $("#treatment_week").val(); // 진단수주
     let accidentType = $("#accident_type").val(); // 사고부위
     let accidentContent = $("#accident_content").val(); // 피해내용
-    let afterTreatmentFee  = $("#after_treatment_fee").val(); // 항우치료비
+    let afterTreatmentFee  = $("#after_treatment_fee").val().replace(regex,""); // 항우치료비
 
     let face = $("#face :checked").val(); //얼굴
     let waist    = $("#waist:checked").val();  //허리(척추)
@@ -233,20 +343,23 @@
         alert('저장에러.');
       },
       success : function(data){
-        // alert("통신데이터 값 : " + data);
+        // alert("통신데이터 값 : " + JSON.stringify(data));
+        //   alert("통신데이터 값 : " + data.bohumlossofbusiness);
+          $("#bohumlossofbusiness").text(data.bohumlossofbusiness); // 보험사휴업손해액
+          $("#bubumlossofbusiness").text(data.bubumlossofbusiness); // 법원휴업손해액
+          $("#afterTreatmentFee").text(data.afterTreatmentFee);  // 공통항우치료비
+          $("#afterTreatmentFee2").text(data.afterTreatmentFee);  //  공통항우치료비
+          $("#bohumsolatium").text(data.bohumsolatium); //  보험사 위자료
+          $("#bubumsolatium").text(data.bubumsolatium); //  법원 위자료
+          $("#transportcost").text(data.transportcost); //  공통 교통비
+          $("#transportcost2").text(data.transportcost); //  공통 교통비
+          $("#bohum_sum").text(data.bohumSum); //  보험사 합의금
+          $("#bubum_sum").text(data.bubumSum); //   법원 합의금
         alert('계산 완료.');
-        window.location.reload();
+        console.log(data)
       }
 
     });
-
-      $("#login").click(function() {
-        var userId = $("#userId").val();
-        var userPw = $("#userPw").val();
-        console.log(userId + " userId")
-        console.log(userPw + "   userPw")
-      });
-
 
 
   }

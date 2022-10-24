@@ -53,6 +53,8 @@
                         , bruise_check
                         , fracture_check
                         , bonefracture_check
+                        , bohum_sum
+                        , bubum_sum
         )VALUES (
                  #{birthdate}
                 , #{accidentDate}
@@ -79,6 +81,8 @@
                 , #{bruise}
                 , #{fracture}
                 , #{ripped}
+                , #{bohumSum}
+                , #{bubumSum}
                 )
         ]]>
     </insert>
@@ -87,5 +91,52 @@
 <!--                    , #{modId}-->
 <!--                    , now()-->
 <!--                    , 'N'-->
+
+    <select id="mainListDao"
+            resultType="com.damage.adjuster.dto.damageInfo">
+        <![CDATA[
+               SELECT
+--                           생년월일
+                        birthdate as birthdate
+--                               사고발생일
+                        , accident_date as accidentDate
+--                               입원일수
+                        , hospital_period as hospitalPeriod
+--                               통원치료 횟수
+                        , treatment_num as treatmentNum
+--                               과실율
+                        , error_rate as errorRate
+--                               소득구분
+                        , income_class as incomeClass
+--                               월소득
+                        , income_month as incomeMonth
+--                               진단주수
+                        , treatment_week as treatmentWeek
+--                               사고부위
+                        , accident_type as accidentType
+--                               피해내용
+                        , accident_content as accidentContent
+--                               항우치료비
+                        , after_treatment_fee as afterTreatmentFee
+                        , create_at as createDate
+                        , update_at as updateDate
+                        , face_check as face
+                        , waist_check as waist
+                        , neck_check as neck
+                        , hand_check as hand
+                        , belly_check as belly
+                        , leg_check as leg
+                        , teeth_check as teeth
+                        , shoulder_check as shoulder
+                        , sprain_check as sprain
+                        , bruise_check as bruise
+                        , fracture_check as fracture
+                        , bonefracture_check as ripped
+                        , bohum_sum as bohumSum
+                        , bubum_sum as bubumSum
+                    FROM main
+                    ]]>
+    </select>
+
 
 </mapper>

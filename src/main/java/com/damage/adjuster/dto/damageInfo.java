@@ -25,6 +25,7 @@ public class damageInfo {
     private int afterTreatmentFee; // 항우치료비
     private Date createDate;
     private Date updateDate;
+
     private int face     ; // 얼굴
     private int waist   ; // 허리(척추)
     private int neck    ; // 목
@@ -33,6 +34,7 @@ public class damageInfo {
     private int leg    ; // 다리(발)
     private int teeth  ; // 치아
     private int shoulder    ; // 어깨
+
     private int sprain    ; // 염좌
     private int bruise    ; // 타박상
     private int fracture    ; // 부러짐(골절)
@@ -43,5 +45,8 @@ public class damageInfo {
     private int bohumsolatium    ; //  보험사 위자료
     private int bubumsolatium    ; //  법원 위자료
     private int transportcost    ; //  공통 교통비
+
+    private int bohumSum ; //  보험 합의금
+    private int bubumSum ; //  법원 합의금
 
 }
