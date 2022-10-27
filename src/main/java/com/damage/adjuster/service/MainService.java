@@ -54,6 +54,20 @@ public class MainService {
             //    미성년자는 0원
             info.setIncomeMonth("0");
         }
+        if(info.getHospitalCheck().equals("1")){
+            //일반병원일 경우
+            info.setAfterTreatmentFee((Integer.parseInt(info.getManualTherapy())*114750)+(Integer.parseInt(info.getShockwaveTherapy())*72000)+
+                    (Integer.parseInt(info.getChunaTherapy())*20000)+(Integer.parseInt(info.getGeneralTherapy())*10000));
+        }else if(info.getHospitalCheck().equals("2")){
+            //한방병원일 경우
+            info.setAfterTreatmentFee((Integer.parseInt(info.getManualTherapy())*150000)+(Integer.parseInt(info.getShockwaveTherapy())*85000)+
+                    (Integer.parseInt(info.getChunaTherapy())*20000)+(Integer.parseInt(info.getGeneralTherapy())*10000));
+        }else if(info.getHospitalCheck().equals("3")){
+            //한의원일 경우
+            info.setAfterTreatmentFee((Integer.parseInt(info.getManualTherapy())*114750)+(Integer.parseInt(info.getShockwaveTherapy())*74000)+
+                    (Integer.parseInt(info.getChunaTherapy())*20000)+(Integer.parseInt(info.getGeneralTherapy())*10000));
+        }
+
 
         if(info.getIncomeMonth() !=null || !info.getIncomeMonth().equals("")) {
             // 휴업손해액 보험사 - (월소득/30)*입원기간(일)*0.85
@@ -113,35 +127,82 @@ public class MainService {
 //        for(int i =0 ; i<inforRsult.size();i++){
 //            System.out.println(inforRsult.get(i) + "         서비스 값");
 //        }
+        int accidentTypeSucheck =0;
+        int accidentContentSucheck =0;
 
         for(int i =0 ; i<inforRsult.size();i++){
             if(inforRsult.get(i).getFace() ==1){
-                accidentTypeResult +="얼굴, ";
+                if( accidentTypeSucheck <2){
+                    accidentTypeResult +="얼굴, ";
+                }
+                accidentTypeSucheck++;
             } if(inforRsult.get(i).getWaist() ==1){
-                accidentTypeResult +="허리(척추), ";
+                if( accidentTypeSucheck <2) {
+                    accidentTypeResult += "허리(척추), ";
+                }
+                accidentTypeSucheck++;
             } if(inforRsult.get(i).getNeck() ==1){
-                accidentTypeResult +="목, ";
+                if( accidentTypeSucheck <2) {
+                    accidentTypeResult += "목, ";
+                }
+                accidentTypeSucheck++;
             } if(inforRsult.get(i).getHand() ==1){
-                accidentTypeResult +="팔(손), ";
+                if( accidentTypeSucheck <2) {
+                    accidentTypeResult += "팔(손), ";
+                }
+                accidentTypeSucheck++;
             } if(inforRsult.get(i).getBelly() ==1){
-                accidentTypeResult +="복부(가슴), ";
+                if( accidentTypeSucheck <2) {
+                    accidentTypeResult += "복부(가슴), ";
+                }
+                accidentTypeSucheck++;
             } if(inforRsult.get(i).getLeg() ==1){
-                accidentTypeResult +="다리(발), ";
+                if( accidentTypeSucheck <2) {
+                    accidentTypeResult += "다리(발), ";
+                }
+                accidentTypeSucheck++;
             } if(inforRsult.get(i).getTeeth() ==1){
-                accidentTypeResult +="어깨, ";
+                if( accidentTypeSucheck <2) {
+                    accidentTypeResult += "어깨, ";
+                }
+                accidentTypeSucheck++;
             } if(inforRsult.get(i).getShoulder() ==1){
-                accidentTypeResult +="치아, ";
+                if( accidentTypeSucheck <2) {
+                    accidentTypeResult += "치아, ";
+                }
+                accidentTypeSucheck++;
             }
 
              if(inforRsult.get(i).getSprain() ==1){
-                accidentContentResult += "염좌, ";
+                 if( accidentContentSucheck <2) {
+                     accidentContentResult += "염좌, ";
+                 }
+                 accidentContentSucheck++;
             } if(inforRsult.get(i).getBruise() ==1){
-                accidentContentResult += "타박상, ";
+                if( accidentContentSucheck <2) {
+                    accidentContentResult += "타박상, ";
+                }
+                accidentContentSucheck++;
             } if(inforRsult.get(i).getFracture() ==1){
-                accidentContentResult += "부러짐(골절), ";
+                if( accidentContentSucheck <2) {
+                    accidentContentResult += "부러짐(골절), ";
+                }
+                accidentContentSucheck++;
             } if(inforRsult.get(i).getRipped() ==1){
-                accidentContentResult += "찢어짐(창상), ";
+                if( accidentContentSucheck <2) {
+                    accidentContentResult += "찢어짐(창상), ";
+                }
+                accidentContentSucheck++;
             }
+
+            if(accidentTypeSucheck >=3){
+                accidentTypeResult +="...";
+            }
+            if( accidentContentSucheck >=3) {
+                accidentContentResult +="...";
+            }
+            accidentTypeSucheck=0;
+            accidentContentSucheck =0;
             inforRsult.get(i).setAccidentType(accidentTypeResult);
             inforRsult.get(i).setAccidentContent(accidentContentResult);
             accidentTypeResult = "";

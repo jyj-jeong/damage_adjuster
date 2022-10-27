@@ -40,6 +40,12 @@ public class damageInfo {
     private int fracture    ; // 부러짐(골절)
     private int ripped    ; // 찢어짐(창상)
 
+    private String hospitalCheck ; // 병원
+    private String manualTherapy ;  // 도수치료
+    private String shockwaveTherapy ;  // 충격파치료
+    private String chunaTherapy ;  // 추나요법
+    private String generalTherapy;  // 일반통원
+
     private int bohumlossofbusiness    ; // 보험사휴업손해액
     private int bubumlossofbusiness    ; // 법원휴업손해액
     private int bohumsolatium    ; //  보험사 위자료
@@ -48,5 +54,7 @@ public class damageInfo {
 
     private int bohumSum ; //  보험 합의금
     private int bubumSum ; //  법원 합의금
+
+
 
 }

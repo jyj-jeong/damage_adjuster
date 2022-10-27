@@ -5,9 +5,12 @@
   <link rel="stylesheet" href="../static/css/style.css">
   <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
   <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3562530480354195"
+            crossorigin="anonymous"></script>
+    <link rel="icon" href="../static/img/favi.jpg">
 </head>
 <header>
-    <div style="background-color: blue;height: 150px">
+    <div style="background-color: blue;height: 150px;width:94%;margin-left:3%">
          광고 영역
     </div>
 </header>
@@ -15,6 +18,9 @@
   <div id="root">
     <main id="main">
       <div class="contractDetail">
+          <h3>교통사고 합의금 계산기</h3>
+          <p style="font-size:12px">#교통사고 합의금 #주부 교통사고 합의금 #학생 교통사고 합의금 #소액 교통사고 합의금 #2주 교통사고 합의금 #3주 교통사고 합의금 #경상 교통사고 합의금 #경미한 교통사고 합의금</p>
+          &nbsp;
         <div class="detailInfo">
           <div class="info1 box" style="height: 1500px">
 <!--            <h1>고객정보</h1>-->
@@ -83,27 +89,40 @@
               <input type="checkbox" name="chk_info2" id="fracture" value=1>부러짐(골절)
               <input type="checkbox" name="chk_info2" id="ripped" value=1>찢어짐(창상)
             </div>
-            <div>
-              <p>항후 치료비</p>
-              <input class="grayBox" type="text" id="after_treatment_fee" onkeyup="commaval(this.id)"/>
-            </div>
+<!--            <div>-->
+<!--              <p>항후 치료비</p>-->
+<!--              <input class="grayBox" type="text" id="after_treatment_fee" onkeyup="commaval(this.id)"/>-->
+<!--            </div>-->
+              <div>
+                  <p>향후치료(횟수)</p>
+                  <input type="radio" name="radi_info2" id="general_hospital" value=1>일반병원
+                  <input type="radio" name="radi_info2"  id="oriental_hospital" value=2>한방병원
+                  <input type="radio" name="radi_info2"  id="oriental_clinic" value=3>한의원
+                  <div>도수치료 &nbsp;&nbsp;   <input style="width:70%;margin:10px;" class="grayBox2" type="text" id="manual_therapy"/></div>
+                  <div>충격파치료 <input  style="width:70%;margin:10px;" class="grayBox2" type="text" id="shockwave_therapy"/></div>
+                  <div>추나요법 &nbsp;&nbsp;  <input  style="width:70%;margin:10px;" class="grayBox2" type="text" id="chuna_therapy"/></div>
+                  <div>일반통원 &nbsp;&nbsp;  <input  style="width:70%;margin:10px;" class="grayBox2" type="text" id="general_therapy"/></div>
+              </div>
             <div class="buttonAreaTwo column">
               <button onclick="calculrate()">계산</button>
-              <!--        <button onclick="checkButton()">cpzm</button>-->
+<!--                      <button onclick="checkButton()">cpzm</button>-->
             </div>
-              <div style="background-color: blue;height: 450px">
+              <div style="background-color: blue;height: 400px">
                   광고영역
               </div>
           </div>
           <div class="info1 box" style="height: 1500px">
-            <P style="margin-right: 250px;color:red">**필독</P>
-                <pre style="margin-right:100px">
-                  교통사고 합의금 계산기는 급여소득자나 학생, 전업주부등
-                  직업에 관계없이 보험사와 합의 시 적당한 보험금 또는
-                  합의금 계산에 대해 알려드릴 목적으로 만들어 졌으며
-                  보험사에 제출되는 서류로서 근거가 되지 않음을
-                  알려드립니다.
+              <div style="text-align:left">
+                  <P style="margin-right: 250px;color:red;width:90%;background-color:#ffc9ce">**필독</P>
+                  <pre style="margin-right:300px">
+
+ 교통사고 합의금 계산기는 급여소득자나 학생, 전업주부등
+ 직업에 관계없이 보험사와 합의 시 적당한 보험금 또는
+ 합의금 계산에 대해 알려드릴 목적으로 만들어 졌으며
+ 보험사에 제출되는 서류로서 근거가 되지 않음을
+ 알려드립니다.
                 </pre>
+              </div>
             <div>
               <h2>교통사고 합의금 계산결과</h2>
               <table>
@@ -111,7 +130,11 @@
                 <th>보험사기준</th>
                 <th>법원판결기준</th>
                 <tr><!-- 첫번째 줄 시작 -->
-                  <td>휴업손해액</td>
+                  <td>휴업손해액  <img style="width:15px;height:15px" src="../static/img/qus.PNG"
+                                  title="휴업손해액은 입원 기간 동안 일을 하지 못함으로
+발생하는 손해를 말합니다.
+일반적으로 월 소득을 기준으로 판단합니다."/>
+                  </td>
                   <td id="bohumlossofbusiness">0</td>
                   <td id="bubumlossofbusiness">0</td>
                 </tr><!-- 첫번째 줄 끝 -->
@@ -121,7 +144,12 @@
                   <td id="afterTreatmentFee2">0</td>
                 </tr><!-- 두번째 줄 끝 -->
                 <tr>
-                  <td>위자료</td>
+                  <td>위자료   <img style="width:15px;height:15px" src="../static/img/qus.PNG"
+                                 title="위자료는 자동차손해배상보장법에 시행령에
+기재된 사고 부상등급표를 기준으로 12~14등급은
+일반적으로 15만원이 책정되어 있으며 법원
+소송진행시 추가적인 청구가 가능합니다."/>
+                  </td>
                   <td id="bohumsolatium">0</td>
                   <td id="bubumsolatium">0</td>
                 </tr>
@@ -141,12 +169,13 @@
                     * 장해 등의 큰 사고의 경우 계산이 맞지 않을 수 있습니다.
                 </div>
             </div>
-              <div class="buttonArea">
-                  <button style="background-color: yellow;color:black" onclick = "window.open('http://pf.kakao.com/_xlVxkKxj')">
+              <div class="buttonArea"style="text-align: center;width: 100%">
+                  <button style="background-color: yellow;color:black;width: 100%;" onclick = "window.open('http://pf.kakao.com/_xlVxkKxj')">
                       <strong>카톡 무료상담 신청</strong>
                   </button>
               </div>
 
+          <div>
               <h2>최근 실시간 계산기 사용</h2>
               <table>
                   <th>진단주수</th>
@@ -155,11 +184,11 @@
                   <th>합의금(보험사)</th>
                   <th>합의금(법원)</th>
                   <tr th:each="allList : ${allcall}">
-                      <td th:text="${allList.treatmentWeek}">0</td>
+                      <td th:text="${#numbers.formatInteger(allList.treatmentWeek, 0, 'COMMA')}">0</td>
                       <td th:text="${allList.accidentType}">0</td>
                       <td th:text="${allList.accidentContent}">0</td>
-                      <td th:text="${allList.bohumSum}">0</td>
-                      <td th:text="${allList.bubumSum}">0</td>
+                      <td th:text="${#numbers.formatInteger(allList.bohumSum, 0, 'COMMA')}">0</td>
+                      <td th:text="${#numbers.formatInteger(allList.bubumSum, 0, 'COMMA')}">0</td>
                   </tr><!-- 첫번째 줄 끝 -->
 <!--                  <tr>-->
 <!--                      <td>1번</td>-->
@@ -190,6 +219,7 @@
 <!--                      <td>5번</td>-->
 <!--                  </tr>-->
               </table>
+          </div>
           </div>
         </div>
       </div>
@@ -276,6 +306,7 @@
     console.log(leg+ "   6");
     console.log(teeth+ "   7");
     console.log(shoulder+ "   8");
+
     console.log(sprain+ "   9");
     console.log(bruise+ "   10");
     console.log(fracture+ "   11");
@@ -294,9 +325,35 @@
     let treatmentWeek = $("#treatment_week").val(); // 진단수주
     let accidentType = $("#accident_type").val(); // 사고부위
     let accidentContent = $("#accident_content").val(); // 피해내용
-    let afterTreatmentFee  = $("#after_treatment_fee").val().replace(regex,""); // 항우치료비
+    // let afterTreatmentFee  = $("#after_treatment_fee").val().replace(regex,""); // 항우치료비
+    //   if(afterTreatmentFee ==null ||afterTreatmentFee ==""){
+    //       afterTreatmentFee =0;
+    //   }
+      console.log("   1");
+    let hospitalCheck = $('input:radio[name=radi_info2]:checked').val(); // 병원
+    let manualTherapy = $("#manual_therapy").val().replace(regex,"");  // 도수치료
+    let shockwaveTherapy = $("#shockwave_therapy").val().replace(regex,"");  // 충격파치료
+    let chunaTherapy = $("#chuna_therapy").val().replace(regex,"");  // 추나요법
+    let generalTherapy = $("#general_therapy").val().replace(regex,"");  // 일반통원
+      console.log("   2");
+      if(hospitalCheck ==null ||hospitalCheck ==""){
+          hospitalCheck ="1";
+      }
 
-    let face = $("#face :checked").val(); //얼굴
+     if(manualTherapy ==null ||manualTherapy ==""){
+          manualTherapy ="0";
+     }
+     if(shockwaveTherapy ==null ||shockwaveTherapy ==""){
+         shockwaveTherapy ="0";
+     }
+     if(chunaTherapy ==null ||chunaTherapy ==""){
+         chunaTherapy ="0";
+     }
+     if(generalTherapy ==null ||generalTherapy ==""){
+         generalTherapy ="0";
+     }
+      console.log("   3");
+    let face = $("#face:checked").val(); //얼굴
     let waist    = $("#waist:checked").val();  //허리(척추)
     let neck     = $("#neck:checked").val();   //목
     let hand     = $("#hand:checked").val();  //팔(손)
@@ -309,7 +366,7 @@
     let bruise     = $("#bruise:checked").val(); //타박상
     let fracture     = $("#fracture:checked").val(); //부러짐(골절)
     let ripped     = $("#ripped:checked").val();   //찢어짐
-
+      console.log("   4");
     $.ajax({
       type : "POST",
       url : "/api/v1/app/calculrate",
@@ -325,7 +382,7 @@
         "treatmentWeek":treatmentWeek,
         "accidentType":accidentType,
         "accidentContent":accidentContent,
-        "afterTreatmentFee":afterTreatmentFee,
+        // "afterTreatmentFee":afterTreatmentFee,
         "face":face,
         "waist":waist,
         "neck":neck,
@@ -338,6 +395,11 @@
         "bruise":bruise,
         "fracture":fracture,
         "ripped":ripped,
+        "hospitalCheck":hospitalCheck,
+        "manualTherapy":manualTherapy,
+        "shockwaveTherapy":shockwaveTherapy,
+        "chunaTherapy":chunaTherapy,
+        "generalTherapy":generalTherapy,
       },
       error : function(){
         alert('저장에러.');
@@ -345,16 +407,17 @@
       success : function(data){
         // alert("통신데이터 값 : " + JSON.stringify(data));
         //   alert("통신데이터 값 : " + data.bohumlossofbusiness);
-          $("#bohumlossofbusiness").text(data.bohumlossofbusiness); // 보험사휴업손해액
-          $("#bubumlossofbusiness").text(data.bubumlossofbusiness); // 법원휴업손해액
-          $("#afterTreatmentFee").text(data.afterTreatmentFee);  // 공통항우치료비
-          $("#afterTreatmentFee2").text(data.afterTreatmentFee);  //  공통항우치료비
-          $("#bohumsolatium").text(data.bohumsolatium); //  보험사 위자료
-          $("#bubumsolatium").text(data.bubumsolatium); //  법원 위자료
-          $("#transportcost").text(data.transportcost); //  공통 교통비
-          $("#transportcost2").text(data.transportcost); //  공통 교통비
-          $("#bohum_sum").text(data.bohumSum); //  보험사 합의금
-          $("#bubum_sum").text(data.bubumSum); //   법원 합의금
+
+          $("#bohumlossofbusiness").text((data.bohumlossofbusiness).toString().replace(moneycom,",")); // 보험사휴업손해액
+          $("#bubumlossofbusiness").text((data.bubumlossofbusiness).toString().replace(moneycom,",")); // 법원휴업손해액
+          $("#afterTreatmentFee").text((data.afterTreatmentFee).toString().replace(moneycom,","));  // 공통항우치료비
+          $("#afterTreatmentFee2").text((data.afterTreatmentFee).toString().replace(moneycom,","));  //  공통항우치료비
+          $("#bohumsolatium").text((data.bohumsolatium).toString().replace(moneycom,",")); //  보험사 위자료
+          $("#bubumsolatium").text((data.bubumsolatium).toString().replace(moneycom,",")); //  법원 위자료
+          $("#transportcost").text((data.transportcost).toString().replace(moneycom,",")); //  공통 교통비
+          $("#transportcost2").text((data.transportcost).toString().replace(moneycom,",")); //  공통 교통비
+          $("#bohum_sum").text((data.bohumSum).toString().replace(moneycom,",")); //  보험사 합의금
+          $("#bubum_sum").text((data.bubumSum).toString().replace(moneycom,",")); //   법원 합의금
         alert('계산 완료.');
         console.log(data)
       }

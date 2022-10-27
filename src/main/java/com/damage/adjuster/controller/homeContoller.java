@@ -36,7 +36,7 @@ public class homeContoller {
 
         System.out.println(infoResult.get(0) + "         컨트롤러 리턴값");
         System.out.println(infoResult.get(1) + "         컨트롤러 리턴값");
-        System.out.println(infoResult.get(2) + "         컨트롤러 리턴값");
+//        System.out.println(infoResult.get(2) + "         컨트롤러 리턴값");
 
         return mv;
 
